@@ -1,0 +1,357 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+main {
+  /* transform: scale(0.75);
+  transform-origin: top center; */
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.875rem;
+  text-align: center;
+}
+
+.controls {
+  margin-bottom: 20px;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  font-weight: bold;
+  color: #333;
+}
+
+.controls select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.mode-selector {
+  display: flex;
+  gap: 5px;
+  margin-right: 20px;
+}
+
+.mode-btn {
+  padding: 8px 16px;
+  border: 2px solid #007acc;
+  background: white;
+  color: #007acc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.mode-btn:hover {
+  background: #007acc;
+  color: white;
+}
+
+.mode-btn.active {
+  background: #007acc;
+  color: white;
+}
+
+.container {
+  display: grid;
+  place-content: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  --position: 50%;
+  max-width: 1200px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.image-container {
+  max-width: 900px;
+  height: 675px;
+  aspect-ratio: 3/2;
+  position: relative;
+  background: #f0f0f0;
+  border: 2px solid #ccc;
+}
+
+.slider-image,
+.slider-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+  user-select: none;
+}
+
+/* Target all before images (beforeImage1, beforeImage2, etc.) */
+img[id^="beforeImage"],
+#beforeImage,
+#beforeVideo {
+  z-index: 2;
+  clip-path: inset(0 0 0 var(--position));
+}
+
+/* Target all after images (afterImage1, afterImage2, etc.) */
+img[id^="afterImage"],
+#afterImage,
+#afterVideo {
+  z-index: 1;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.slider:focus-visible ~ .slider-button {
+  outline: 5px solid black;
+  outline-offset: 3px;
+}
+
+.slider-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: .2rem;
+  background-color: #fff;
+  left: var(--position);
+  transform: translateX(-50%);
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 5;
+}
+
+.slider-button {
+  position: absolute;
+  background-color: #fff;
+  color: black;
+  padding: .5rem;
+  border-radius: 100vw;
+  display: grid;
+  place-items: center;
+  top: 50%;
+  left: var(--position);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-shadow: 1px 1px 1px hsl(0, 50%, 2%, .5);
+  z-index: 5;
+}
+
+.overlay-label {
+  position: absolute;
+  bottom: 15px;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  z-index: 6;
+  pointer-events: none;
+  text-shadow: none;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.5px;
+  transition: clip-path 0.02s linear;
+}
+
+.overlay-label-left {
+  left: 4px;
+}
+
+.overlay-label-right {
+  right: 4px;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 0 20px;
+}
+
+/* Video Controls Styles */
+.video-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.control-btn {
+  padding: 10px 20px;
+  border: 2px solid #007acc;
+  background: white;
+  color: #007acc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+  background: #007acc;
+  color: white;
+}
+
+/* Navigation Links */
+.mode-btn {
+  padding: 8px 16px;
+  border: 2px solid #007acc;
+  background: white;
+  color: #007acc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.mode-btn:hover {
+  background: #007acc;
+  color: white;
+}
+
+.mode-btn.active {
+  background: #007acc;
+  color: white;
+}
+
+/* .label-left {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.15);
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 2px solid #e74c3c;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.2);
+}
+
+.label-right {
+  color: #3498db;
+  background: rgba(52, 152, 219, 0.15);
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 2px solid #3498db;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+} */
+
+/* Viewers Grid Layout */
+.viewers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 15px;
+  width: 100%;
+  max-width: 1350px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.viewer-wrapper {
+  padding: 8px;
+  margin: 8px;
+  background: rgb(231, 231, 231);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.viewer-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  justify-content: center;
+}
+
+.viewer-header label {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+}
+
+.scene-selector {
+  padding: 5px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 11px;
+  flex: 1;
+  max-width: 75px;
+  text-align: center;
+}
+
+/* Adjust container size for grid layout */
+.viewers-grid .container {
+  max-width: 100%;
+  width: 100%;
+}
+
+.viewers-grid .image-container {
+  max-width: 100%;
+  height: 450px;
+  aspect-ratio: 3/2;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1200px) {
+  .viewers-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  
+  .viewers-grid .image-container {
+    height: 375px;
+  }
+}
